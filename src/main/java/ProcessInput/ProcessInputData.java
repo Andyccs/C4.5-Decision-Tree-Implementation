@@ -60,6 +60,12 @@ public class ProcessInputData {
 			String[] lineArr = line.split(",");
 			Instance item = new Instance();
 			for (int i = 0; i < lineArr.length; i++) {
+
+				// TODO(andyccs): temporary solution to handle missing values
+				if (lineArr[i].equals("?")) {
+					lineArr[i] = "0";
+				}
+
 				item.addAttribute(attributeSet.get(i).getName(), lineArr[i]);
 			}		
 			instanceSet.add(item);			
