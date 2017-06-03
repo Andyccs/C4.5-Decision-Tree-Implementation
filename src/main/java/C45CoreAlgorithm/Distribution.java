@@ -2,20 +2,15 @@ package C45CoreAlgorithm;
 
 import DataDefination.Attribute;
 import DataDefination.Instance;
-
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 class Distribution {
 
-  private Double totalFrequency;
-
-  private Attribute targetAttribute;
-
   private final Hashtable<String, Double> frequencyByTargetValue;
-
-  private final List<Hashtable<String, Double>> frequencyByBagIndexByTargetValue;
+  private final Hashtable<String, Double>[] frequencyByBagIndexByTargetValue;
+  private Double totalFrequency;
+  private Attribute targetAttribute;
 
   Distribution(final Attribute targetAttribute, final int numberOfBag) {
     assert targetAttribute != null;
@@ -29,11 +24,10 @@ class Distribution {
       this.frequencyByTargetValue.put(targetAttributeValue, 0d);
     }
 
-    this.frequencyByBagIndexByTargetValue = new ArrayList<>(numberOfBag);
+    this.frequencyByBagIndexByTargetValue = new Hashtable[numberOfBag];
     for (int i = 0; i < numberOfBag; i++) {
-      Hashtable<String, Double> clone = (Hashtable<String, Double>) this.frequencyByTargetValue
-          .clone();
-      this.frequencyByBagIndexByTargetValue.add(clone);
+      this.frequencyByBagIndexByTargetValue[i] =
+          (Hashtable<String, Double>) this.frequencyByTargetValue.clone();
     }
   }
 
@@ -41,7 +35,7 @@ class Distribution {
     assert bagIndex >= 0 && bagIndex < this.getNumberOfBag();
     assert instances != null;
 
-    Hashtable<String, Double> currentBagFrequency = frequencyByBagIndexByTargetValue.get(bagIndex);
+    Hashtable<String, Double> currentBagFrequency = frequencyByBagIndexByTargetValue[bagIndex];
     String targetAttributeName = targetAttribute.getName();
     for (Instance instance : instances) {
       String instanceTargetValue = instance.getAttributeValuePairs().get(targetAttributeName);
@@ -55,6 +49,32 @@ class Distribution {
     }
   }
 
+  void shift(int fromBagIndex, int toBagIndex, List<Instance> instances,
+      int fromInclusiveInstancesIndex, int toInclusiveInstancesIndex) {
+    assert fromBagIndex >= 0 && fromBagIndex < this.getNumberOfBag();
+    assert toBagIndex >= 0 && toBagIndex < this.getNumberOfBag();
+    assert fromBagIndex != toBagIndex;
+    assert fromInclusiveInstancesIndex >= 0 && fromInclusiveInstancesIndex < instances.size();
+    assert toInclusiveInstancesIndex >= 0 && toInclusiveInstancesIndex < instances.size();
+    assert fromInclusiveInstancesIndex <= toInclusiveInstancesIndex;
+    assert instances != null;
+
+    Hashtable<String, Double> fromBag = frequencyByBagIndexByTargetValue[fromBagIndex];
+    Hashtable<String, Double> toBag = frequencyByBagIndexByTargetValue[toBagIndex];
+
+    String targetAttributeName = targetAttribute.getName();
+    for (int i = fromInclusiveInstancesIndex; i <= toInclusiveInstancesIndex ; i++) {
+      Instance instance = instances.get(i);
+      String instanceTargetValue = instance.getAttributeValuePairs().get(targetAttributeName);
+
+      Double fromBagClassFrequency = fromBag.get(instanceTargetValue) - 1;
+      fromBag.put(instanceTargetValue, fromBagClassFrequency);
+
+      Double toBagClassFrequency = toBag.get(instanceTargetValue) + 1;
+      toBag.put(instanceTargetValue, toBagClassFrequency);
+    }
+  }
+
   Double getTotalFrequency() {
     return totalFrequency;
   }
@@ -64,7 +84,7 @@ class Distribution {
   }
 
   int getNumberOfBag() {
-    return frequencyByBagIndexByTargetValue.size();
+    return frequencyByBagIndexByTargetValue.length;
   }
 
   Hashtable<String, Double> getFrequencyByTargetValue() {
@@ -73,6 +93,6 @@ class Distribution {
 
   Hashtable<String, Double> getFrequencyByBagIndexByTargetValue(int bagIndex) {
     assert bagIndex >= 0 && bagIndex < this.getNumberOfBag();
-    return frequencyByBagIndexByTargetValue.get(bagIndex);
+    return frequencyByBagIndexByTargetValue[bagIndex];
   }
 }
