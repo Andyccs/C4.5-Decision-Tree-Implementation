@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+mainClassName = "Main"
+
+repositories {
+    maven  {
+        url "http://repo1.maven.org/maven2"
+    }
+}
+
+run {
+    args = ['/Users/andyccs/Downloads/DT_J48_nominal.arff']
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+}
+
+idea {
+    module {
+        excludeDirs += file('.idea')
+    }
+}
