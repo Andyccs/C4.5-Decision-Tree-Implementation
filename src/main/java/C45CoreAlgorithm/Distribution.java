@@ -43,6 +43,7 @@ class Distribution {
       currentBagFrequency.put(instanceTargetValue, perBagClassFrequency);
 
       Double perClassFrequency = frequencyByTargetValue.get(instanceTargetValue) + 1;
+      assert perClassFrequency >= 0;
       frequencyByTargetValue.put(instanceTargetValue, perClassFrequency);
 
       totalFrequency += 1;
@@ -68,9 +69,11 @@ class Distribution {
       String instanceTargetValue = instance.getAttributeValuePairs().get(targetAttributeName);
 
       Double fromBagClassFrequency = fromBag.get(instanceTargetValue) - 1;
+      assert fromBagClassFrequency >= 0;
       fromBag.put(instanceTargetValue, fromBagClassFrequency);
 
       Double toBagClassFrequency = toBag.get(instanceTargetValue) + 1;
+      assert toBagClassFrequency >= 0;
       toBag.put(instanceTargetValue, toBagClassFrequency);
     }
   }

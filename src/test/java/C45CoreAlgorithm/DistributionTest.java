@@ -125,48 +125,65 @@ public class DistributionTest {
   public void testShift() {
     Distribution distribution = new Distribution(targetAttributeFake, 2);
     distribution.add(0, instancesFake);
-
-    // Move the first apple to bag 1.
+    
     distribution.shift(0, 1, instancesFake, 0, 0);
-
     assertEquals(distribution.getTotalFrequency(), 4, 0);
 
-    Hashtable<String, Double> frequencyByClassValue = distribution.getFrequencyByTargetValue();
-    assertEquals(2, frequencyByClassValue.get(TARGET_VALUE_APPLE), 0);
-    assertEquals(1, frequencyByClassValue.get(TARGET_VALUE_ORANGE), 0);
-    assertEquals(1, frequencyByClassValue.get(TARGET_VALUE_GRAPE), 0);
+    Hashtable<String, Double> frequencyByClassValue1 = distribution.getFrequencyByTargetValue();
+    assertEquals(2, frequencyByClassValue1.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(1, frequencyByClassValue1.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(1, frequencyByClassValue1.get(TARGET_VALUE_GRAPE), 0);
 
-    Hashtable<String, Double> frequencyByBagIndex0ByClassValue = distribution
+    Hashtable<String, Double> frequencyByBagIndex0ByClassValue1 = distribution
         .getFrequencyByBagIndexByTargetValue(0);
-    assertEquals(1, frequencyByBagIndex0ByClassValue.get(TARGET_VALUE_APPLE), 0);
-    assertEquals(1, frequencyByBagIndex0ByClassValue.get(TARGET_VALUE_ORANGE), 0);
-    assertEquals(1, frequencyByBagIndex0ByClassValue.get(TARGET_VALUE_GRAPE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue1.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue1.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue1.get(TARGET_VALUE_GRAPE), 0);
 
-    Hashtable<String, Double> frequencyByBagIndex1ByClassValue = distribution
+    Hashtable<String, Double> frequencyByBagIndex1ByClassValue1 = distribution
         .getFrequencyByBagIndexByTargetValue(1);
-    assertEquals(1, frequencyByBagIndex1ByClassValue.get(TARGET_VALUE_APPLE), 0);
-    assertEquals(0, frequencyByBagIndex1ByClassValue.get(TARGET_VALUE_ORANGE), 0);
-    assertEquals(0, frequencyByBagIndex1ByClassValue.get(TARGET_VALUE_GRAPE), 0);
+    assertEquals(1, frequencyByBagIndex1ByClassValue1.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(0, frequencyByBagIndex1ByClassValue1.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(0, frequencyByBagIndex1ByClassValue1.get(TARGET_VALUE_GRAPE), 0);
 
-    distribution.shift(0, 1, instancesFake, 0, 0);
-
+    distribution.shift(0, 1, instancesFake, 2, 2);
     assertEquals(distribution.getTotalFrequency(), 4, 0);
 
-    Hashtable<String, Double> frequencyByClassValueAfter = distribution.getFrequencyByTargetValue();
-    assertEquals(2, frequencyByClassValueAfter.get(TARGET_VALUE_APPLE), 0);
-    assertEquals(1, frequencyByClassValueAfter.get(TARGET_VALUE_ORANGE), 0);
-    assertEquals(1, frequencyByClassValueAfter.get(TARGET_VALUE_GRAPE), 0);
+    Hashtable<String, Double> frequencyByClassValue2 = distribution.getFrequencyByTargetValue();
+    assertEquals(2, frequencyByClassValue2.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(1, frequencyByClassValue2.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(1, frequencyByClassValue2.get(TARGET_VALUE_GRAPE), 0);
 
-    Hashtable<String, Double> frequencyByBagIndex0ByClassValueAfter = distribution
+    Hashtable<String, Double> frequencyByBagIndex0ByClassValue2 = distribution
         .getFrequencyByBagIndexByTargetValue(0);
-    assertEquals(0, frequencyByBagIndex0ByClassValueAfter.get(TARGET_VALUE_APPLE), 0);
-    assertEquals(1, frequencyByBagIndex0ByClassValueAfter.get(TARGET_VALUE_ORANGE), 0);
-    assertEquals(1, frequencyByBagIndex0ByClassValueAfter.get(TARGET_VALUE_GRAPE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue2.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(0, frequencyByBagIndex0ByClassValue2.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue2.get(TARGET_VALUE_GRAPE), 0);
 
-    Hashtable<String, Double> frequencyByBagIndex1ByClassValueAfter = distribution
+    Hashtable<String, Double> frequencyByBagIndex1ByClassValue2 = distribution
         .getFrequencyByBagIndexByTargetValue(1);
-    assertEquals(2, frequencyByBagIndex1ByClassValueAfter.get(TARGET_VALUE_APPLE), 0);
-    assertEquals(0, frequencyByBagIndex1ByClassValueAfter.get(TARGET_VALUE_ORANGE), 0);
-    assertEquals(0, frequencyByBagIndex1ByClassValueAfter.get(TARGET_VALUE_GRAPE), 0);
+    assertEquals(1, frequencyByBagIndex1ByClassValue2.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(1, frequencyByBagIndex1ByClassValue2.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(0, frequencyByBagIndex1ByClassValue2.get(TARGET_VALUE_GRAPE), 0);
+
+    distribution.shift(1, 0, instancesFake, 2, 2);
+    assertEquals(distribution.getTotalFrequency(), 4, 0);
+
+    Hashtable<String, Double> frequencyByClassValue3 = distribution.getFrequencyByTargetValue();
+    assertEquals(2, frequencyByClassValue3.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(1, frequencyByClassValue3.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(1, frequencyByClassValue3.get(TARGET_VALUE_GRAPE), 0);
+
+    Hashtable<String, Double> frequencyByBagIndex0ByClassValue3 = distribution
+        .getFrequencyByBagIndexByTargetValue(0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue3.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue3.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(1, frequencyByBagIndex0ByClassValue3.get(TARGET_VALUE_GRAPE), 0);
+
+    Hashtable<String, Double> frequencyByBagIndex1ByClassValue3 = distribution
+        .getFrequencyByBagIndexByTargetValue(1);
+    assertEquals(1, frequencyByBagIndex1ByClassValue3.get(TARGET_VALUE_APPLE), 0);
+    assertEquals(0, frequencyByBagIndex1ByClassValue3.get(TARGET_VALUE_ORANGE), 0);
+    assertEquals(0, frequencyByBagIndex1ByClassValue3.get(TARGET_VALUE_GRAPE), 0);
   }
 }
