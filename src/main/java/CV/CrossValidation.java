@@ -148,8 +148,6 @@ public class CrossValidation {
         }
       }
       scores.add(correct * 1.0 / res.size());
-
-      long after = System.currentTimeMillis();
     }
     return scores;
   }
