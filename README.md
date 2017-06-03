@@ -1,12 +1,10 @@
 # C4.5 Decision Tree Implementation
-1. Team Name: Team 5 CMU Supernova
-2. Team Members: Xue Lin, Xiaodong Zhou, Jiayi Zhu, Lei Wang
-3. Project Description: Implementation of C4.5 Decision Tree
-4. How to run the main script: 
-(1) First, let the current directory of terminal be 
-THE DIRECTORY OF the jar file ON YOUR COMPUTER
-(2) Next, type command line: java -jar C45Team5.jar <TRAINING_DATA_PATH>
-For example: java -jar C45Team5.jar /Users/Charlotte/Desktop/Data/trainProdSelection.arff
-(3) Then, it will show guide lines of what to do next.
-6. References material: Mitchell, T., Machine Learning.
-7. Youtube link: https://www.youtube.com/watch?v=aOF4U_E4B7Q&feature=youtu.be
+
+How to run main program:
+
+```shell
+$ gradle run -Pargs=<path-to-arff-file>
+
+# Example
+$ gradle run -PC45args=/Users/andyccs/Downloads/DT_J48_nominal.arff
+```

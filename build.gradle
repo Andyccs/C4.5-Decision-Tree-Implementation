@@ -13,7 +13,9 @@ repositories {
 }
 
 run {
-    args = ['/Users/andyccs/Downloads/DT_J48_nominal.arff']
+    if(project.hasProperty('C45args')) {
+        args(C45args.split(','))
+    }
 }
 
 dependencies {
