@@ -124,8 +124,6 @@ public class CrossValidation {
     shuffle(crossValidationN);
     scores = new ArrayList<Double>();
     for (int i = 0; i < testBundles.size(); i++) {
-      long before = System.currentTimeMillis();
-
       trainInstances = new ArrayList<Instance>();
       testInstances = new ArrayList<Instance>();
       result = new ArrayList<Instance>();
@@ -152,7 +150,6 @@ public class CrossValidation {
       scores.add(correct * 1.0 / res.size());
 
       long after = System.currentTimeMillis();
-      System.out.println("Time taken: " + (after - before) + "ms");
     }
     return scores;
   }

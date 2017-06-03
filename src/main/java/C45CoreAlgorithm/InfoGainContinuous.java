@@ -96,7 +96,10 @@ public class InfoGainContinuous {
     // (4) Calculate threshold
     HashMap<String, String> a = instances.get(thresholdPos).getAttributeValuePairs();
     String aValue = a.get(attributeName);
-    HashMap<String, String> b = instances.get(thresholdPos).getAttributeValuePairs();
+
+    int thresholdPositionUpper =
+        thresholdPos + 1 < instances.size() ? thresholdPos + 1 : thresholdPos;
+    HashMap<String, String> b = instances.get(thresholdPositionUpper).getAttributeValuePairs();
     String bValue = b.get(attributeName);
     threshold = (Double.parseDouble(aValue) + Double.parseDouble(bValue)) / 2;
 

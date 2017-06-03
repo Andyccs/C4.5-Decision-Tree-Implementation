@@ -100,7 +100,7 @@ public class Entropy {
     return entropy;
   }
 
-  public static double calculateConti(final List<String> valuesOfTarget,
+  static double calculateConti(final List<String> valuesOfTarget,
       final Hashtable<String, Double> countValueOfTarget,
       final int instancesSize) {
     double entropy = 0;
