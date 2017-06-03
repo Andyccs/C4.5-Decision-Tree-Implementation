@@ -64,7 +64,7 @@ class Distribution {
     Hashtable<String, Double> toBag = frequencyByBagIndexByTargetValue[toBagIndex];
 
     String targetAttributeName = targetAttribute.getName();
-    for (int i = fromInclusiveInstancesIndex; i <= toInclusiveInstancesIndex ; i++) {
+    for (int i = fromInclusiveInstancesIndex; i <= toInclusiveInstancesIndex; i++) {
       Instance instance = instances.get(i);
       String instanceTargetValue = instance.getAttributeValuePairs().get(targetAttributeName);
 

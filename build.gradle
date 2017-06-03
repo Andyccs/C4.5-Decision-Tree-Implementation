@@ -7,13 +7,13 @@ sourceCompatibility = 1.8
 mainClassName = "Main"
 
 repositories {
-    maven  {
+    maven {
         url "http://repo1.maven.org/maven2"
     }
 }
 
 run {
-    if(project.hasProperty('C45args')) {
+    if (project.hasProperty('C45args')) {
         args(C45args.split(','))
     }
 }

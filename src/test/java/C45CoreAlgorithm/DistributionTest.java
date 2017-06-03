@@ -125,7 +125,7 @@ public class DistributionTest {
   public void testShift() {
     Distribution distribution = new Distribution(targetAttributeFake, 2);
     distribution.add(0, instancesFake);
-    
+
     distribution.shift(0, 1, instancesFake, 0, 0);
     assertEquals(distribution.getTotalFrequency(), 4, 0);
 
